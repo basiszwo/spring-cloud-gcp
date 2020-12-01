@@ -7,4 +7,6 @@
     <suppress files="package\-info\.java" checks="RegexpHeader" />
     <suppress files=".*" checks="LineLength" />
     <suppress checks="Illegal" files=".*RSAKeyGeneratorUtils.java"/>
+    <suppress checks="WhitespaceAround" files=".*GcpCloudSqlAutoConfiguration.java"/>
+    <suppress checks="WhitespaceAround" files=".*DatabaseType.java"/>
 </suppressions>

@@ -112,6 +112,27 @@ public class GcpCloudFoundryEnvironmentPostProcessorTests extends AbstractCfEnvT
 	}
 
 	@Test
+	public void testSqlServerConfigurationProperties() throws IOException {
+		String vcapFileContents = new String(Files.readAllBytes(
+				new ClassPathResource("VCAP_SERVICES_SQLSERVER").getFile().toPath()));
+		mockVcapServices(vcapFileContents);
+
+		this.initializer.postProcessEnvironment(this.context.getEnvironment(), null);
+
+		assertThat(getProperty("spring.cloud.gcp.sql.credentials.encoded-key"))
+				.isEqualTo(getPrivateKeyDataFromJson(vcapFileContents, "google-cloudsql-sqlserver"));
+		assertThat(getProperty("spring.cloud.gcp.sql.instance-connection-name"))
+				.isEqualTo("nimbus-services-c990f93eaea62a:europe-west4:sb-72-1606517431990438017");
+		assertThat(getProperty("spring.cloud.gcp.sql.database-name"))
+				.isEqualTo("sb-73-1606517431990535934");
+
+		assertThat(getProperty("spring.datasource.username"))
+				.isEqualTo("sb16065195382669");
+		assertThat(getProperty("spring.datasource.password"))
+				.isEqualTo("KwnCfUaIR3PuaYImCxpN0Pax9j82ePU6zXBT77i6His=");
+	}
+
+	@Test
 	public void test2Sqls() throws IOException {
 		String vcapFileContents = new String(Files.readAllBytes(
 				new ClassPathResource("VCAP_SERVICES_2_SQL").getFile().toPath()));
