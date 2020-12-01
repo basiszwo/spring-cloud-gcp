@@ -82,6 +82,10 @@ A summary of these artifacts are provided below.
 | Cloud SQL integrations with PostgreSQL
 | <<sql.adoc#_spring_jdbc, org.springframework.cloud:spring-cloud-gcp-starter-sql-postgresql>>
 
+| SQL - SQL Server
+| Cloud SQL integrations with SQL Server
+| <<sql.adoc#_spring_jdbc, org.springframework.cloud:spring-cloud-gcp-starter-sql-sqlserver>>
+
 | Storage
 | Provides integrations with Google Cloud Storage and Spring Resource
 | <<storage.adoc#_spring_resources, org.springframework.cloud:spring-cloud-gcp-starter-storage>>

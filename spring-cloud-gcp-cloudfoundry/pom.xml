@@ -50,6 +50,9 @@
                      using the jdk.attach.allowAttachSelf property on JDK 11 -->
                 <configuration>
                     <argLine>-Djdk.attach.allowAttachSelf=true</argLine>
+                    <includes>
+                        <include>GcpCloudFoundryEnvironmentPostProcessorTests.java</include>
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>

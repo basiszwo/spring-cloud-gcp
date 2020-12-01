@@ -77,12 +77,13 @@ public class GcpCloudFoundryEnvironmentPostProcessor
 
 			Set<GcpCfService> servicesToMap = new HashSet<>(Arrays.asList(GcpCfService.values()));
 
-			List<CfService> sqlServices = cfEnv.findServicesByLabel(GcpCfService.MYSQL.getCfServiceName(), GcpCfService.POSTGRES.getCfServiceName());
-			if (sqlServices.size() == 2) {
-				LOGGER.warn("Both MySQL and PostgreSQL bound to the app. "
+			List<CfService> sqlServices = cfEnv.findServicesByLabel(GcpCfService.MYSQL.getCfServiceName(), GcpCfService.POSTGRES.getCfServiceName(), GcpCfService.SQLSERVER.getCfServiceName());
+			if (sqlServices.size() == 3) {
+				LOGGER.warn("Both MySQL, PostgreSQL, SQL Server bound to the app. "
 						+ "Not configuring Cloud SQL.");
 				servicesToMap.remove(GcpCfService.MYSQL);
 				servicesToMap.remove(GcpCfService.POSTGRES);
+				servicesToMap.remove(GcpCfService.SQLSERVER);
 			}
 
 			servicesToMap.forEach(
@@ -192,7 +193,8 @@ public class GcpCloudFoundryEnvironmentPostProcessor
 				.put("dataset_id", "dataset-name")
 				.build()),
 		MYSQL("google-cloudsql-mysql", "sql", sqlPropertyMap),
-		POSTGRES("google-cloudsql-postgres", "sql", sqlPropertyMap);
+		POSTGRES("google-cloudsql-postgres", "sql", sqlPropertyMap),
+		SQLSERVER("google-cloudsql-sqlserver", "sql", sqlPropertyMap);
 
 		/**
 		 * Name of the GCP Cloud Foundry service in the VCAP_SERVICES JSON.

@@ -35,7 +35,15 @@ public enum DatabaseType {
 	 */
 	POSTGRESQL("org.postgresql.Driver", "jdbc:postgresql://google/%s?"
 			+ "socketFactory=com.google.cloud.sql.postgres.SocketFactory"
-			+ "&cloudSqlInstance=%s");
+			+ "&cloudSqlInstance=%s"),
+
+	/**
+	 * SQL Server constants.
+	 */
+	SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://google;"
+			+ "databaseName=%s;"
+			+ "socketFactory=com.google.cloud.sql.sqlserver.SocketFactory;"
+			+ "cloudSqlInstance=%s;");
 
 	private final String jdbcDriverName;
 

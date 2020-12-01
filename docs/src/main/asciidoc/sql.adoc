@@ -1,9 +1,9 @@
 == Cloud SQL
 
 Spring Cloud GCP adds integrations with
-https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html[Spring JDBC] so you can run your MySQL or PostgreSQL databases in https://cloud.google.com/sql[Google Cloud SQL] using Spring JDBC, or other libraries that depend on it like Spring Data JPA.
+https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html[Spring JDBC] so you can run your MySQL, PostgreSQL or SQL Server databases in https://cloud.google.com/sql[Google Cloud SQL] using Spring JDBC, or other libraries that depend on it like Spring Data JPA.
 
-The Cloud SQL support is provided by Spring Cloud GCP in the form of two Spring Boot starters, one for MySQL and another one for PostgreSQL.
+The Cloud SQL support is provided by Spring Cloud GCP in the form of three Spring Boot starters, one for MySQL, PostgreSQL and SQL Server.
 The role of the starters is to read configuration from properties and assume default settings so that user experience connecting to MySQL and PostgreSQL is as simple as possible.
 
 Maven coordinates, using <<getting-started.adoc#_bill_of_materials, Spring Cloud GCP BOM>>:
@@ -18,6 +18,10 @@ Maven coordinates, using <<getting-started.adoc#_bill_of_materials, Spring Cloud
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-gcp-starter-sql-postgresql</artifactId>
 </dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-gcp-starter-sql-sqlserver</artifactId>
+</dependency>
 ----
 
 Gradle coordinates:
@@ -27,6 +31,7 @@ Gradle coordinates:
 dependencies {
     implementation("org.springframework.cloud:spring-cloud-gcp-starter-sql-mysql")
     implementation("org.springframework.cloud:spring-cloud-gcp-starter-sql-postgresql")
+    implementation("org.springframework.cloud:spring-cloud-gcp-starter-sql-sqlserver")
 }
 ----
 

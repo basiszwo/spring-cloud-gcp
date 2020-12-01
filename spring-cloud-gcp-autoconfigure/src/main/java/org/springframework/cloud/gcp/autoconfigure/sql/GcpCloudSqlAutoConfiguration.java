@@ -131,12 +131,40 @@ public class GcpCloudSqlAutoConfiguration { //NOSONAR squid:S1610 must be a clas
 	}
 
 	/**
+	 * The SqlServer Configuration for the {@link DefaultCloudSqlJdbcInfoProvider}
+	 * based on the {@link DatabaseType#SQLSERVER}.
+	 */
+	@ConditionalOnClass({ com.google.cloud.sql.sqlserver.SocketFactory.class,
+		com.microsoft.sqlserver.jdbc.SQLServerDriver.class })
+	@ConditionalOnMissingBean(CloudSqlJdbcInfoProvider.class)
+	static class SqlServerJdbcInfoProviderConfiguration {
+
+		@Bean
+		public CloudSqlJdbcInfoProvider defaultSqlServerJdbcInfoProvider(
+				GcpCloudSqlProperties gcpCloudSqlProperties) {
+			CloudSqlJdbcInfoProvider defaultProvider =
+					new DefaultCloudSqlJdbcInfoProvider(gcpCloudSqlProperties, DatabaseType.SQLSERVER);
+
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info("Default " + DatabaseType.SQLSERVER.name()
+						+ " JdbcUrl provider. Connecting to "
+						+ defaultProvider.getJdbcUrl() + " with driver "
+						+ defaultProvider.getJdbcDriverClass());
+			}
+
+			return defaultProvider;
+		}
+
+	}
+
+	/**
 	 * The Configuration to populated {@link DataSourceProperties} bean
 	 * based on the cloud-specific properties.
 	 */
 	@Configuration(proxyBeanMethods = false)
 	@Import({GcpCloudSqlAutoConfiguration.MySqlJdbcInfoProviderConfiguration.class,
-			GcpCloudSqlAutoConfiguration.PostgreSqlJdbcInfoProviderConfiguration.class })
+			GcpCloudSqlAutoConfiguration.PostgreSqlJdbcInfoProviderConfiguration.class,
+			GcpCloudSqlAutoConfiguration.SqlServerJdbcInfoProviderConfiguration.class })
 	static class CloudSqlDataSourcePropertiesConfiguration {
 
 		@Bean

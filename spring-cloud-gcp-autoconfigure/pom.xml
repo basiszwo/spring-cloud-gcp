@@ -117,6 +117,20 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- SQL Server -->
+        <dependency>
+            <groupId>com.google.cloud.sql</groupId>
+            <artifactId>cloud-sql-connector-jdbc-sqlserver</artifactId>
+            <!-- TODO: Remove version tag-->
+            <version>1.2.0</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+        </dependency>
+
         <!-- Storage -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

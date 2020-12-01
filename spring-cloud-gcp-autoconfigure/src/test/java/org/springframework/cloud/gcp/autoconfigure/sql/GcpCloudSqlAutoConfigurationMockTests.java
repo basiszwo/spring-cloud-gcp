@@ -216,6 +216,24 @@ public class GcpCloudSqlAutoConfigurationMockTests {
 	}
 
 	@Test
+	public void testSqlServer() {
+		this.contextRunner.withPropertyValues(
+				"spring.cloud.gcp.sql.instanceConnectionName=tubular-bells:singapore:test-instance")
+				.withClassLoader(
+						new FilteredClassLoader("com.google.cloud.sql.mysql", "com.google.cloud.sql.postgres"))
+				.run((context) -> {
+					CloudSqlJdbcInfoProvider urlProvider =
+							context.getBean(CloudSqlJdbcInfoProvider.class);
+					assertThat(urlProvider.getJdbcUrl()).isEqualTo(
+							"jdbc:sqlserver://google;"
+									+ "databaseName=test-database;"
+									+ "socketFactory=com.google.cloud.sql.sqlserver.SocketFactory;"
+									+ "cloudSqlInstance=tubular-bells:singapore:test-instance;");
+					assertThat(urlProvider.getJdbcDriverClass()).matches("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				});
+	}
+
+	@Test
 	public void testNoJdbc() {
 		this.contextRunner.withPropertyValues(
 				"spring.cloud.gcp.sql.instanceConnectionName=tubular-bells:singapore:test-instance")
