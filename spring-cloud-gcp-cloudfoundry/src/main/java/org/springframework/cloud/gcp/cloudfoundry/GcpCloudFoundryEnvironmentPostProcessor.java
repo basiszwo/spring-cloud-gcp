@@ -78,8 +78,8 @@ public class GcpCloudFoundryEnvironmentPostProcessor
 			Set<GcpCfService> servicesToMap = new HashSet<>(Arrays.asList(GcpCfService.values()));
 
 			List<CfService> sqlServices = cfEnv.findServicesByLabel(GcpCfService.MYSQL.getCfServiceName(), GcpCfService.POSTGRES.getCfServiceName(), GcpCfService.SQLSERVER.getCfServiceName());
-			if (sqlServices.size() == 3) {
-				LOGGER.warn("Both MySQL, PostgreSQL, SQL Server bound to the app. "
+			if (sqlServices.size() > 1) {
+				LOGGER.warn("Any two of MySQL, PostgreSQL or SQL Server are bound to the app (max 1 supported). "
 						+ "Not configuring Cloud SQL.");
 				servicesToMap.remove(GcpCfService.MYSQL);
 				servicesToMap.remove(GcpCfService.POSTGRES);

@@ -42,8 +42,8 @@ public enum DatabaseType {
 	 */
 	SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://google;"
 			+ "databaseName=%s;"
-			+ "socketFactory=com.google.cloud.sql.sqlserver.SocketFactory;"
-			+ "cloudSqlInstance=%s;");
+			+ "socketFactoryClass=com.google.cloud.sql.sqlserver.SocketFactory;"
+			+ "socketFactoryConstructorArg=%s;");
 
 	private final String jdbcDriverName;
 
