@@ -225,10 +225,10 @@ public class GcpCloudSqlAutoConfigurationMockTests {
 					CloudSqlJdbcInfoProvider urlProvider =
 							context.getBean(CloudSqlJdbcInfoProvider.class);
 					assertThat(urlProvider.getJdbcUrl()).isEqualTo(
-							"jdbc:sqlserver://google;"
+							"jdbc:sqlserver://127.0.0.1;"
 									+ "databaseName=test-database;"
 									+ "socketFactoryClass=com.google.cloud.sql.sqlserver.SocketFactory;"
-									+ "cloudSqlInstance=tubular-bells:singapore:test-instance;");
+									+ "socketFactoryConstructorArg=tubular-bells:singapore:test-instance;");
 					assertThat(urlProvider.getJdbcDriverClass()).matches("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				});
 	}

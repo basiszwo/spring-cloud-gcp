@@ -40,7 +40,7 @@ public enum DatabaseType {
 	/**
 	 * SQL Server constants.
 	 */
-	SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://google;"
+	SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://127.0.0.1;"
 			+ "databaseName=%s;"
 			+ "socketFactoryClass=com.google.cloud.sql.sqlserver.SocketFactory;"
 			+ "socketFactoryConstructorArg=%s;");
